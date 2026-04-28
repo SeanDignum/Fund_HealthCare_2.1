@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { User } from "lucide-react"
+import { User, MessageSquare } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const menuItems = [
@@ -88,6 +88,20 @@ export function Sidebar() {
             </Link>
           )
         })}
+
+        {/* Chat / Logs */}
+        <Link
+          href="/chat"
+          className={cn(
+            "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+            pathname === "/chat"
+              ? "bg-primary text-primary-foreground"
+              : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+          )}
+        >
+          <MessageSquare className="h-5 w-5 shrink-0" />
+          Chat / Logs
+        </Link>
 
         {/* Profile — no matching product icon */}
         <Link
