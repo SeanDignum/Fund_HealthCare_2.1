@@ -9,6 +9,7 @@ An AI-powered patient monitoring and provider search dashboard for healthcare pr
 - **Provider Search** — search by NPI number, provider name, or organization with regional and specialty filters
 - **Risk Indicators** — visual risk markers based on billing code usage frequency
 - **Messaging** — direct communication between doctors and patients
+- **Chat / Logs** — audit log of patient-doctor-AI conversations grouped by visit, with fraud anomaly detection
 
 ## Tech Stack
 
@@ -55,4 +56,21 @@ Product-specific PNG icons are served from `public/` and mapped to sidebar secti
 | Alerts | 3.2 Fraud Signals & Investigation |
 | Analytics | 1.2 Review Your Treatment & Get Clarity |
 | Messages | 2.2 AI Documentation & Coding Assistant |
+| Chat / Logs | MessageSquare (Lucide icon) |
 | Sidebar logo | 1.1 AI Health Assistant |
+
+## Chat / Logs
+
+Located at `/chat`. Displays read-only communication audit logs between patients, doctors, and the AI Health Assistant, organized by clinical visit.
+
+**Scenarios included:**
+
+| Scenario | Billing | Anomaly |
+|---|---|---|
+| AI Monitoring | 99457 — Remote Physiologic Monitoring | — |
+| Upcoding Trap | 99215 — High Complexity Visit | Critical fraud indicator |
+| Clinical Anamnesis | 99204 — New Patient Visit | — |
+
+Each visit shows billing code, duration, and timestamps per message. Messages flagged by semantic analysis are highlighted with an anomaly indicator explaining the mismatch. File attachments (PDF, image, lab) are rendered inline.
+
+Mock data: `lib/mock-data-chat.ts`
