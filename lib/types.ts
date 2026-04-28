@@ -127,3 +127,53 @@ export interface Provider {
   region: Region
   billingCodes: BillingCode[]
 }
+
+// ─── Chat / Logs ───────────────────────────────────────────────────────────────
+
+export type ChatRole = "patient" | "doctor" | "ai"
+
+export type AttachmentType = "pdf" | "image" | "lab"
+
+export interface ChatAttachment {
+  id: string
+  name: string
+  type: AttachmentType
+  sizeLabel: string
+}
+
+export interface ChatMessage {
+  id: string
+  role: ChatRole
+  authorName: string
+  content: string
+  timestamp: string
+  attachments?: ChatAttachment[]
+  anomalyFlag?: {
+    severity: "warning" | "critical"
+    reason: string
+  }
+}
+
+export type ScenarioType = "ai-monitoring" | "upcoding-trap" | "clinical-anamnesis"
+
+export interface ChatVisit {
+  visitId: string
+  visitDate: string
+  billingCode: string
+  billingLabel: string
+  durationMinutes: number
+  messages: ChatMessage[]
+  anomalyDetected?: {
+    severity: "warning" | "critical"
+    summary: string
+  }
+}
+
+export interface ChatScenario {
+  id: ScenarioType
+  label: string
+  description: string
+  patientName: string
+  patientId: string
+  visits: ChatVisit[]
+}
